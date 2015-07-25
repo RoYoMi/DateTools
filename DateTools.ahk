@@ -4,39 +4,6 @@ class DateTools {
 	; to use these you can simply call them as datetools.<method name>
 	SyntaxExamples() {
 	
-	
-;		arrTargets := ["a-1", "b-2", "c-3", "d-4", "e-5", "f-6", "g-7", "h-8", "i-9", "j-10", "k-11", "l-12", "m-13", "n-14", "o-15", "p-16", "q-17", "q-18", "q-19", "q-20", "q-21"]
-;		arrTargets := ["a-1"]
-		
-;			GroupSize := 5
-;			TotalCount := arrTargets.MaxIndex()
-;			First := 1
-;			NumberOfGroups := Ceil(TotalCount / GroupSize)
-;			if ( NumberOfGroups > 1 ) {
-;				Loop, % NumberOfGroups
-;					{
-;					strMessage .= "`nLoop = '" . First . "' .. '" . Last . "' = " . funJoin(",", ObjectTools.FromRange(arrTargets, First, First + GroupSize - 1) )
-;					First := Last + 1
-;					} ; end loop
-;				} ; end if
-				
-;		strMessage .= "`nChunksOfArray"
-;		strMessage .= ReportParams(ObjectTools.ChunksOfArray({Array:arrTargets, Chunks:8, SmallestChunkSize:5, Debug:False}), ".")
-;		MsgBox, % strMessage
-
-;		Today := New date("20150716-213614")					; sets the date to today
-;		StaticDate := New date("18841121-203010")					; sets the date to today
-;		
-;		TimeSpan := StaticDate.TimeSpan(Today)	; calculate the difference between Today, which was set earlier, and our StaticDate which we have been modifying
-;		strMessage .= "`n`nTimeSpan between '" . Today.Format . "' and '" . StaticDate.Format . "'" . DateTools.ReportOptions(TimeSpan)
-;
-;		StaticDate.Add(-1) := TimeSpan
-;		strMessage .= "`n'" . StaticDate.Format("yyyy.MM.dd-HH:mm:ss") . "' = return to 2015.07.16-21:36:14"		
-;
-;	MsgBox, % strMessage
-;	return
-
-;		Today := New date("20150716213614")					; sets the date to today
 		Today := New date					; sets the date to today
 		strMessage .= "`n'" . Today.Format("yyyy.MM.dd-HH:mm:ss") . "' = ThisDate"   ; return the formatted datetime
 
@@ -75,19 +42,11 @@ class DateTools {
 		StaticDate.Till  
 		strMessage .= "`n"
 		strMessage .= "`n'" . StaticDate.Till . "' = Till" 
-		; strMessage .= "`n" 
-		; strMessage .= "`n'" . StaticDate.Format . "' = Format 0 start" 
-		; strMessage .= "`n'" . StaticDate.Format("yyyyMMdd") . "' = Format 1 should not save" 
+
 		 strMessage .= "`n'" . StaticDate.Format . "' = Format 2" 
 		 strMessage .= "`n'" . (StaticDate.Format := "yyyyMMdd-HH") . "' = Format 3 should save" 
 		 strMessage .= "`n'" . StaticDate.Format . "' = Format 4" 
 		 
-;		strMessage .= "`n'" . StaticDate.Add(TimeSpan, "Reverse") . "' = return to 2015.07.16-21:36:14"		
-;		strMessage .= "`n`n" . DateTools.ReportOptions( StaticDate.JulianDates )
-		 
-		 
-;	MsgBox, % strMessage
-;	return
 		 strMessage .= "`n`n'" . Today.Parse().DayOfWeek.NameLong . "' = Day of week"
 		 
 		 StaticDate := New date("2015Dec31") 	; sets the date to a static value. 
@@ -288,11 +247,14 @@ class DateTools {
 				DateTime := DateTools.NextDay( DateTime, IncrementDirection, DayOfWeek )
 
 				; move date the desired number of days to accommodate the entire move
-				DaysInSeries := {Weekdays:5, Weekends:2, Mondays:1, Tuesdays:1, Wednesdays:1, Thursdays:1, Fridays:1, Saturdays:1, Sundays:1}[DayOfWeek]
-				DateTime += (floor(abs(IncrementCount) / DaysInSeries) * IncrementDirection * 7) + mod(IncrementCount, DaysInSeries) * Multiplier, days
+				; note that we already moved to the first of this day type above with NextDay
+				if ( IncrementCount-- ) {
+					DaysInSeries := {Weekdays:5, Weekends:2, Mondays:1, Tuesdays:1, Wednesdays:1, Thursdays:1, Fridays:1, Saturdays:1, Sundays:1}[DayOfWeek]
+					DateTime += (floor(abs(IncrementCount) / DaysInSeries) * IncrementDirection * 7) + mod(IncrementCount, DaysInSeries) * Multiplier, days
+					} ; end if 
 				
 				; one last check to ensure we've landed on the correct day type, I agree this is probably overkill.
-				DateTime := DateTools.NextDay( DateTime, IncrementDirection, DayOfWeek )
+				; DateTime := DateTools.NextDay( DateTime, IncrementDirection, DayOfWeek )
 				} ; end if Param.HasKey(DayOfWeek)
 			} ; next weekday
 		return, % DateTime
