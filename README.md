@@ -1,5 +1,5 @@
 ### DateTools
-Builds a date object, complete with methods for manipulating dates and times, via a programmer-friendly interface. Dates are automatically parsed from a variety of formats, however the safest format is yyyyMMddHHmmss. This is the autohotkey standard format. When parsing dates, any missing date information will derived from the information provided or will be gathered from A_Now.
+Builds a date object, complete with methods for manipulating dates and times, via a programmer-friendly interface. Dates are automatically parsed from a variety of formats. When parsing dates, any missing date information will derived from the information provided or will be gathered from A_Now.
 
 Note, this set of functions may not behave properly for dates before the 1600's.
 
