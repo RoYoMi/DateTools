@@ -3,6 +3,8 @@ Builds a date object, complete with methods for manipulating dates and times, vi
 
 Note, this set of functions may not behave properly for dates before the 1600's.
 
+See also: [the better write up](https://github.com/RoyOMiller/DateTools/wiki/DateTools-v0.1)
+
 ### Features
 
 * Date Math 
