@@ -1,11 +1,13 @@
-# DateTools
-Builds a date object, complete with methods for manipulating dates and times, via a programmer-friendly interface. Dates are automatically parsed from a variety of formats, however the safest format is yyyyMMddHHmmss. This is the autohotkey standard format. When parsing dates, any missing date information will derived from the information provided or will be gathered from A_Now
+### DateTools
+Builds a date object, complete with methods for manipulating dates and times, via a programmer-friendly interface. Dates are automatically parsed from a variety of formats, however the safest format is yyyyMMddHHmmss. This is the autohotkey standard format. When parsing dates, any missing date information will derived from the information provided or will be gathered from A_Now.
 
-Note, this set of functions may not behave properly for dates before the 1600's
+Note, this set of functions may not behave properly for dates before the 1600's.
 
-Required: Authotkey v1.1.22 +
+### Required
 
-Install and Use: 
+	Authotkey v1.1.22 +
+
+### Install and Use: 
 
 	#Include DateTools.ahk
 	
@@ -15,7 +17,7 @@ Install and Use:
 	
 	MsgBox, % "Four Score and Seven Years ago was '" . Today.Add({Score:-4, Years:-7}) . "'"
 
-Syntax
+### Syntax
 
 	MyDate := new Date(value|hash)	: creates a new date object
 			value 			: optional, string or date object, defaults to A_Now; The provided value will be parsed and This.DateTime will be set to the yyyyMMddHHmmss format
